@@ -1,0 +1,33 @@
+// SPDX-License-Identifier: MIT 
+pragma solidity ^0.8.0;
+
+contract localStore {
+
+    uint public electronicshelf;
+    uint public items;
+
+    constructor() {
+        electronicshelf = 10;
+    }
+
+    function additems  (uint _items) public {
+        items = _items;
+    }
+
+    function shelfIsnotFull() public view returns (bool) {
+        require(items < electronicshelf, "Shelf is not full");
+        assert(items != electronicshelf);
+
+        return true;
+    }
+
+    function shelfIsfull() public view returns (bool) {
+        require(items >= electronicshelf);
+
+        if (items > electronicshelf) {
+            revert("Shelf is full, no new items can be kept");
+        }
+
+        return true;
+    }
+}
